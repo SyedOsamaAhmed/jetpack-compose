@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,15 +13,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
-import androidx.compose.ui.layout.ContentScale
+
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composearticle.ui.theme.ComposeArticleTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ComposeArticle()
+                    TaskManger()
 
                 }
             }
@@ -40,26 +45,32 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ComposeArticle(){
-    val image= painterResource(id = R.drawable.background)
+fun TaskManger() {
+    val image = painterResource(id = R.drawable.task_completed)
 
-    Column {
-        Image(painter = image, contentDescription = null, contentScale = ContentScale.FillWidth )
-        
-        Text(text = "JetPack Compose Tutorial", fontSize = 24.sp, modifier = Modifier.padding(16.dp))
-        Text(text = "Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.", modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp), textAlign = TextAlign.Justify)
-        Text(text = "In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.", modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize(), textAlign = TextAlign.Justify)
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box {
+            Image(painter = image, contentDescription = null)
+        }
+
+        Text(
+            text = "All tasks completed",
+            modifier = Modifier.padding(top = 24.dp, bottom = 8.dp),
+            fontWeight = FontWeight.Bold
+        )
+        Text(text = "Nice work!", fontSize = 16.sp)
+
     }
 
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun TaskPreview() {
     ComposeArticleTheme {
-        ComposeArticle()
+        TaskManger()
     }
 }
